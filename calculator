@@ -1,0 +1,131 @@
+#### HTML ###
+<html>
+<head> 
+<script src="https://use.fontawesome.com/fab417e5fd.js"></script>
+  <script src="  https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"></script>
+  </head>
+  <body>
+  <section id="background">
+    
+<center> <i class="fa fa-calculator" aria-hidden="true">
+  <h3>Calculator <br> </h3> </i>
+<h4>by Scott Schmidt, MBA</h4>
+   <a href="https://scottschmidtportfolio.000webhostapp.com/" target="_blank">SS Web Studio</a> 
+  
+  <div class="container">
+<form>  
+<div id="calculator">
+  <input type = "text" disabled class ="center" id="total"></input>
+<form> 
+  </br>
+  
+ <input type = button value = AC onclick="display('c');" </input>
+ <input type=button value = CE onclick="deleteOne();" </input>
+  <input type = button  value = - onclick="display('-');" </input>
+  <input type = button  value = + onclick="display('+');" </input>
+  </br>
+  <input type = button value = 7 onclick="display(7);" </input>
+  <input type = button value = 8 onclick="display(8);" </input>
+  <input type = button value = 9 onclick="display(9);" </input>
+  <input type = button value = x onclick="display('*');" </input>
+ </br>
+  <input type = button value = 4 onclick="display(4);" </input>
+  <input type = button value = 5 onclick="display(5);" </input>
+  <input type = button value = 6 onclick="display(6);" </input>
+  <input type = button value = / onclick="display('/');" </input>
+ </br>
+  <input type = button value = 0 onclick="display(0);" </input>
+  <input type = button value = 1 onclick="display(1);" </input>
+  <input type = button value = 2 onclick="display(2);" </input>
+<input type = button value = 3 onclick="display(3);" </input>
+</br>
+  <input type = button  onclick="equal();" id="equals" value= "="></input>
+<input type = button value = '.' ionclick="display('.');" </input>
+<input type = button value = '^2' onclick="power();" </input>
+</div>
+</form>
+</div>
+
+<br><br><br><br>
+</section>
+</body>
+</html>
+
+### CSS ###
+h3{
+font-size:601%;
+text-shadow: 2px 2px orange;
+font-family: pristina;
+font-align: center;
+}
+#background{
+  background: url("https://thumbs.dreamstime.com/t/students-desk-wooden-background-54256611.jpg") no-repeat center fixed;
+  background-size:cover;
+}
+
+body, html, #wrapper {
+  overflow-x: hidden;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  text-align: center;
+  display: block;
+  font-weight: 700;
+}
+#total {
+ margin-bottom:0px;
+  background:white;
+  width:9em;
+  height:30px;
+  text-align: right;
+  margin: auto;
+ font-size:15px bold;
+}
+
+h3{
+text-align:center;
+font-size:300%;
+}
+#calculator{
+  height:250px;
+  width:250px;
+  background-color:silver;
+  margin: auto;
+  border style:solidblack;
+  border-radius:30px;
+  padding:26px;
+}
+
+form{
+text-align:center;
+  }
+#equals{ 
+  width:100px;
+}
+
+### JavaScript ### 
+
+var total = document.getElementById("total");
+
+  function display(x) {  
+  total.value=total.value+x; 
+   if (x==='c') {
+    total.value=' '; 
+}}
+
+function deleteOne() {
+var backspace = total.value.length-1;
+  total.value = total.value.substring(0, backspace);
+}
+
+function equal(){ 
+  x = total.value;
+  x = eval(x);
+ total.value = x;
+}
+
+function power() {
+  var squared = Math.pow(total.value, 2);
+  total.value = squared;
+}
