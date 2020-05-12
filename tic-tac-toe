@@ -1,0 +1,148 @@
+# https://codepen.io/ScottFSchmidt/details/YQWprL
+
+### HTML ###
+
+<h1>  Tic-Tac-Toe </h1>
+
+<center>
+<div class="options oneline center" id=x >X</div> 
+<div class="options oneline" id=o> O</div>
+</center>
+
+<div id="reset">RESET </div>
+<br>
+
+<center><div id=turn >0</div> 
+
+<center>
+<div class="board">
+<button type="button" id=1>#</button>
+  <button type="button" id=2>#</button>
+  <button type="button" id=3>#</button>
+<br>
+<button type="button" id=4>#</button>
+  <button type="button" id=5>#</button>
+  <button type="button" id=6>#</button>
+<br>
+<button type="button" id=7>#</button>
+  <button type="button" id=8>#</button>
+  <button type="button" id=9>#</button>
+</div>
+
+### CSS ### 
+
+.center{
+  text-align:center;
+   display: block;
+    margin: 0 auto;
+}
+
+.oneline 
+    {    
+       border: solid 1px #ccc; 
+       float: left;
+      margin: 0 auto;
+    } 
+
+h1{
+  padding:0px;
+  margin:0px;
+  text-align:center;
+  font-size:300%;
+  text-shadow: 2px 2px silver;
+  family-font: Jazz LET, fantasy;
+  font-style: italic;
+  font-variant: small-caps;
+}
+
+.x{
+  color:red;
+  font-weight:bold;
+}
+.o{
+  color:teal;
+  font-weight:bold;
+}
+
+#turn{
+  color:white;
+  font-size:200%;
+  background:black;
+  width:100px;
+  border-style:solid;
+  border-color:gray;
+}
+.options{
+  width:20px;
+  height:20px;
+  border-radius:1em;
+  color:white;
+  background-color:black;
+  border-style:solid;
+  border-color:gray;
+}
+
+button{
+  width:100px;
+  height:100px;
+  color:white;
+  background-color:black;
+  border:5px solid darkgray;
+  font-size:40px;
+}
+
+body{background:url("http://orig06.deviantart.net/9e34/f/2010/250/d/6/wooden_texture_by_jinansekhar-d2y8sr9.jpg") fixed center no-repeat;
+  background-size:cover;
+  }
+
+#reset{
+  font-size:200%;
+  font-weight:bold;
+   width:110px;
+  height:40px;
+  border-radius:0;
+  color:black;
+  font-weight:bold;
+  background-color:red;
+  border-style:solid;
+  border-color:black;
+   margin-left:auto;
+  margin-right:auto;
+  display:block;
+  text-align:center;
+  }
+#winner{
+   width:300px;
+  height:50px;
+  color:black;
+  font-weight:bold;
+  background-color:green;
+  border-style:solid;
+  border-color:black;
+   margin-left:auto;
+  margin-right:auto;
+  display:block;
+  text-align:center;
+  font-size:200%;
+  }
+  
+ ### J-Query ###
+ 
+ $(document).ready(function() {
+var turn=0;
+var computerMark="O";
+ var humanMark = "X"
+ var once;
+  
+ function reset(){
+ $(".options").show();
+ $("button").html("#");
+ turn=0;
+ $("button").removeClass("x");
+ $("button").removeClass("o");
+ var computerMark="O";
+ var humanMark = "X"
+  }
+ 
+ 
+ 
