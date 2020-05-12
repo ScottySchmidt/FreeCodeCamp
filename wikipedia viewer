@@ -1,0 +1,113 @@
+# https://codepen.io/ScottFSchmidt/pen/zzJxqr
+
+
+## HTML ###
+<script src="https://use.fontawesome.com/fab417e5fd.js"></script>
+
+<h1> Wiki Peaks</h1>
+<h2>Wikipedia Search Viewer</h2>
+<center><i class="fa fa-wikipedia-w" aria-hidden="true"></i>
+<input type="text" id="searchword" ></input> <i id="searchicon" class="fa fa-search" aria-hidden="true"></i>
+
+<br>
+<button type="button" class="btn btn-primary" id="enter">Enter</button>   
+<br>
+<div id="data"</div> 
+
+<!--
+COMMENTED OUT NOW THAT THIS IS A PART OF MY PORTFOLIO. CAN BE ADDED IN TO MEET FREECODECAMP REQUIREMENTS.
+<a href="https://en.wikipedia.org/wiki/Special:Random" id="random">Random Wiki Article</a>
+-->
+
+### CSS ### 
+
+#data{
+  font-size:200%;
+  font-weight:bold;
+  background-color:white;
+}
+
+#searchicon{
+  color:black;
+}
+#searchword{
+  width:300px;
+  height:30px;
+  border-width:1px;
+  border-color:green;
+}
+#enter{
+  background:;
+  margin:auto;
+  text-align:center;
+  opacity:.85;
+  font-size:20px;
+  color:black;
+  border-style:solid;
+  border-color:black;
+  border-width:1px;
+}
+
+#random{
+  display:block;
+  color:white;
+  height:0px;
+  width:200px;
+  padding:0px;
+  background:black;
+  margin:auto;
+  opacity:1;
+  font-size:20px;
+}
+
+body{
+background:url("https://images.unsplash.com/photo-1469536526925-9b5547cd5d68?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg") no-repeat fixed center;
+  background-size:cover;
+}
+
+h2{
+  text-align:center;
+  font-weight:bold;
+
+}
+h1{
+  margin:0px;
+  padding:0px;
+   font-size:400%;
+  text-shadow: 2px 2px darkgreen;
+  family-font: Jazz LET, fantasy;
+  font-style: italic;
+  font-variant: normal;
+  text-align: center;
+}
+
+### JavaScript ###
+$(document).ready(function(){
+$("#enter").click(function(){
+  var searchword=$("#searchword").val();
+ var link='https://en.wikipedia.org/w/api.php?action=opensearch&search='+searchword+'&format=json&callback=?';
+$.ajax( {
+  type: 'GET',  
+  url: link,
+  async:false, 
+    dataType: 'json',
+    success: function(data) {
+      console.log(data);  
+      
+      $("#data").html(data[1][0]+"<br>"+  " "+data[2][0]+" "+data[3][0]);
+       
+      console.log(data[2][0]);
+      console.log(data[3][0]);
+        
+    }, error:function(error){
+      console.log("error");
+    }
+ 
+});
+});
+});
+ 
+
+
+
+/
