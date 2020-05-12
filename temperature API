@@ -1,0 +1,149 @@
+# https://codepen.io/ScottFSchmidt/pen/NmXYyq
+# This project was very beneficial because it was my first time having to scrape data.
+# It was also fun because I felt this project was very practical and useful!
+# Note: This API sometimes slightly changes, so every year or it "breaks" and I have to update the code.
+
+### HTML ###
+<body>
+<div class="container">
+  
+  <div id="app-display">
+    <h1>Local Weather App</h1>
+  
+       <div id="location">
+        Your Location is <span id="city">Loading...</span>, <span id="state"></span>
+      </div><!--End of Location-->
+
+   <div id="weather">
+          <div class="row">
+             <span id="wIcon"></span>
+         </div>
+
+          <div class="row">
+           It's <span id="temp"></span> over there!
+         </div>
+
+          <div class="row">
+         <button class="btn btn-primary" id="btnToggle">Convert C/F Temp</button>
+          </div>
+  </div><!--End of Weather-->
+
+  <!--Required Credit Link-->
+    <div id="cred">
+      Powered by
+    <a href="http://openweathermap.org/api" target="_blank">Open Weather API</a>, 
+  <a href="https://ipinfo.io/developers"  target="_blank">https://ipinfo.io</a> and
+       <a href="https://github.com/Rob--W/cors-anywhere/"  target="_blank">cors-anywhere.herokuapp.com</a>
+      </div>
+    
+  </div><!--End of App Display section-->
+</div>
+</body>
+  
+  ### CSS ###
+  body {
+  background: url("http://i.imgur.com/tfXMQwm.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+#app-display {
+  width: 940px;
+  height: 450px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  position: relative;
+  margin: 0 auto;
+  top: 90px;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  padding-top: 40px;
+  color: #fff;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+#city, #state {
+  color: aqua;
+}
+
+#weather {
+ margin-top: 10px;
+}
+
+#temp {
+  color: yellow;
+}
+
+#btn {
+  margin-top: 10px;
+}
+
+img {
+  width: 70px;
+}
+
+
+#cred {
+  color: yellow !important;
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+a {
+  color: aqua!important;
+}
+
+### JavaScript ###
+$(document).ready(function(){
+
+var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+  var Ip = 'https://ipinfo.io/json';
+
+     $.getJSON(Ip, function(data) {
+      var city = data.city;
+      var region = data.region;
+      var country = data.country;
+
+      var KEY = '&APPID=767a7cce68ed2b3098d41e24364ec56c';
+
+      var URL ='http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + region + country + KEY;
+
+      $.getJSON(proxy + URL, function(data) {
+        var type = data.weather[0].main;  //array 0 index
+        var id = data.weather[0].id; //array 0 index
+        var city = data.name;
+
+        var tempCel = Math.round(data.main.temp - 273.15);
+        var tempC = tempCel + '°C';
+        var weather = data.weather[0].description;
+        var tempF = Math.round(tempCel * (9 / 5) + 32) + '°F';
+        var icon = data.weather[0].icon;
+        var tempBool = true;
+
+        //Output data to display on the page
+        $('#city').text(city);
+        $('#state').text(region);
+       $('#temp').text(tempF); //Show Fahrenheit by Default
+       var weatherIcon = 'http://openweathermap.org/img/w/' + icon + '.png';
+        $('#wIcon').html('<img src=' + weatherIcon + '>');
+
+
+   //Then toggle to switch between F and C temperature.
+   $('#btnToggle').on('click', function() {
+        var temp = $('#temp');
+        if (tempBool) {
+            temp.html(tempC);
+            tempBool = false
+            } else {
+            temp.html(tempF);
+            tempBool = true;
+         }
+      }); //End of toggle function
+
+        });
+     });
+  });
