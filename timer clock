@@ -1,0 +1,105 @@
+# https://codepen.io/ScottFSchmidt/pen/KqxPyW
+
+### HTML ###
+<h2 id="count">30</h2>
+
+<center>  
+<input type=button class="green" id="start" value=start </input>
+
+<input class="green" type=button id="add" value="add"></input>
+<input class="red" type=button id="minus" value="minus"></input>
+<input class="red" type=button id="reset" value="reset"></input>
+
+### CSS ###
+#count{
+  display:block;
+  color:white;
+  font-size:100px;
+  width:300px;
+  padding:80px;
+  border-color:white;
+  border-width:10px;
+  border-style:solid;
+  background-color:black;
+  margin:auto;
+  text-align:center;
+  opacity:.80;
+}
+
+body{background:url("http://www.desicomments.com/wallpapers/wp-content/uploads/2014/12/Clouds-Top-View.jpg") no-repeat fixed center;
+  background-size:cover;
+}
+
+.green{
+   margin:auto;
+  text-align:center;
+    width:200px;
+  height:100px;
+  font-size:300%;
+  color:green;
+}
+
+.red{  
+  margin:auto;
+  text-align:center;
+    width:200px;
+  height:100px;
+  font-size:300%;
+  color:red;
+}
+
+### JavaScript ###
+$(document).ready(function(){
+  //var count = document.getElementById("num");
+  var count=parseInt($("#count").html());
+  
+  var counter = setInterval(start, 1000);
+  console.log("test");
+  
+  $("#start").click(function(){
+   if (count>=0){  
+    $("#start").attr("disabled", "disabled");  
+    var counter = setInterval(start, 1000); 
+    }
+    function start(){
+      if (count===0){
+      console.log("zero");
+        clearInterval(counter);
+  var audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+audio.play();
+      }
+      if (count>0){
+      count--;
+     
+      //$("#num").html(count);
+      $("#count").html(Math.floor(count/60)+':'+(count%60));
+     console.log(count);
+    }}
+$("#reset").click(function(){
+ //var counter = setInterval(start, 1000);
+  clearInterval(counter);
+  $("#start").attr("disabled", false); 
+  count===0;
+   $("#count").html(900);
+  console.log("reset worked");
+  });
+  });
+$("#add").click(function(){
+  count+=60;
+  $("#count").html(count);
+}); 
+
+$("#minus").click(function(){
+  if(count>60) {
+  count-=60;
+  $("#count").html(count); 
+  }
+});   
+  
+}); //document.ready
+
+
+
+
+
+
