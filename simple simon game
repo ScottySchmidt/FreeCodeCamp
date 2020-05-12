@@ -1,0 +1,331 @@
+# https://codepen.io/ScottFSchmidt/pen/gRvBbW
+# From what I remember, this was one of the hardest projects to build. 
+# The JavaScript/JQuery part took a while as a first-year coding student.
+
+
+### HTML ####
+<h1> Simple Simon  </h1>
+<h2>Simon is an electronic game of memory skill game.... The device creates a series of tones and lights and requires a user to repeat the series. If the user succeeds the series becomes progressively longer and more complex (Wikipedia). Press start to begin!!</h2>
+
+<div class="center">
+<button id="start">Start</button>
+<button id="reset">Reset</button>
+
+  <div id="count" class="count">1</div>
+  </center></div></div>
+  
+<center>
+<button  id="green"></button>
+  <button id="red"></button>
+  <br>
+  <button id="yellow"></button>
+  <button id="blue"></button>
+</center>
+
+<button class="center" id="strict">Strict</button>
+
+### CSS ### 
+
+button{
+  text-align:center;
+  
+}
+.center{
+  text-align:center;
+   display: block;
+    margin: 0 auto;
+}
+
+#strict{  
+  width:110px;
+  height:50px;
+
+  color:black;
+  font-weight:bold;
+  background-color:green;
+  border-style:solid;
+  border-color:black;
+display:block;
+  text-align:center;
+  font-size:200%;
+ }
+
+#reset{
+   width:110px;
+  height:50px;
+  border-radius:0;
+  color:black;
+  font-weight:bold;
+  background-color:darkred;
+  border-style:solid;
+  border-color:black;
+font-size:200%;
+  font-weight:bold;
+  }
+
+#start{
+margin-right:50px;
+   width:110px;
+  height:50px;
+  border-radius:0;
+  color:black;
+  font-weight:bold;
+  background-color:green;
+  border-style:solid;
+  border-color:black;
+ text-align:center;
+  font-size:200%;
+  font-weight:bold;
+}
+h2{
+  text-align:center;
+  font-weight:bold;
+}
+
+h1{
+  
+    margin:0;
+    padding:0;
+font-size:500%;
+text-shadow: 2px 2px darkgray;
+font-family: pristina;
+text-align: center;
+}
+
+#count{
+  background-color:black;
+  color:white;
+  border-style:solid;
+  border-color:silver;
+  font-size:30px;
+  text-align:center;
+  height:40px;
+  width:100px;
+  margin:auto;
+}
+#green{
+  height:200px;
+  width:200px;
+  border-style:solid;
+  border-color:black;
+  background-color:green;
+  border-width:5px;
+  
+  }
+
+#red{
+  height:200px;
+  width:200px;
+  border-style:solid;
+  border-color:black;
+  border-width:5px;
+  background-color:darkred;
+
+}
+
+#yellow{
+  height:200px;
+  width:200px;
+  border-style:solid;
+  border-color:black;
+  border-width:5px;
+  background-color:yellow;
+ 
+  }
+
+#blue{
+  height:200px;
+  width:200px;
+  border-style:solid;
+  border-color:black;
+  border-width:5px;
+  background-color:darkblue;
+}
+
+body{background:url("https://s-media-cache-ak0.pinimg.com/736x/aa/40/39/aa403919172b82be48b8bd93b79e9a3d.jpg") fixed center no-repeat;
+  background-size:120%;
+  }
+
+.clickable{
+  cursor:pointer;
+}
+.notclickable{
+  cursor:none;
+}
+.switch{
+position:relative;
+height:34;
+ width:60;
+display:inline-box;
+  margin:auto;
+   vertical-align: middle;
+  text-align:center;
+}
+
+### JavaScript/JQuery #### 
+$(document).ready(function(){
+  var count=0; 
+  var solutionArray =[];
+  var human=[];  
+   function reset(){
+    var count=1;
+     solutionArray=[];
+     human=[];
+     var num=1;
+  var strict="off";
+   $("#start").prop('disabled', false);
+     $("#strict").prop('disabled', false);
+  }
+ function soundFlash(x){
+ switch (x){
+        case 1:    
+$("#green").fadeIn(100).fadeOut(100).fadeIn(50);
+     audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+audio.play();
+  break;
+       case 2: 
+$("#red").fadeIn(100).fadeOut(100).fadeIn(50);
+ audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+audio.play();
+break;
+      case 3:  
+$("#yellow").fadeIn(100).fadeOut(100).fadeIn(50);
+     var audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    audio.play(); 
+          break;
+        case 4:
+$("#blue").fadeIn(100).fadeOut(100).fadeIn(50);
+     new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3').play();
+break;
+  }
+   };//end switch  
+ var strict="off";
+    var num=1;
+  $("#strict").click(function(){
+   num+=1;
+   if (num%2===0){
+     $("#strict").css("background", "red");
+     strict="on";
+     console.log(strict);
+   }
+   if (num%2!==0){
+     $("#strict").css("background", "green");
+     strict="off";
+   } });   
+  
+  function playSequence(){
+     solutionArray.forEach(function(value, index) {
+      setTimeout(function(){
+    soundFlash(value);                 
+                 }, index*2000);
+          });
+}
+  
+  function generateMove(){
+    var randomNum=Math.floor(Math.random()*3+1);
+           solutionArray.push(randomNum);
+       console.log(solutionArray);
+    setTimeout(function(){ 
+        playSequence();
+      },1500);
+  };  
+ function nextLevel(){
+  
+   count+=1; 
+   $('.count').html(count); 
+   setTimeout(function(){
+     generateMove();
+     },1500);
+   //not needed, but prevents move so doesnt overlap with previous move.
+ if (count>=20){
+     alert("Congrats, you win!!");
+     reset();
+   generateMove();
+   }}
+
+  function checkAnswer(){
+       console.log("check answer func triggered...human="+human);
+         var correct = solutionArray.every(function(element, index){
+          return element===human[index];
+           });
+     if (correct){
+       clearTimeout(soundFlash);
+       human=[];
+       alert("next level");
+       nextLevel();
+       }
+    if (!correct){
+      clearTimeout(soundFlash);
+      new Audio('https://drive.google.com/uc?export=view&id=0B66xaYRsJwbGclNHWVByY3ltRWM').play();     
+      human=[];
+      alert("Try Again");
+      setTimeout(function(){ 
+        playSequence();
+      },1500);
+ }
+  if(!correct && strict=="on"){
+       new Audio('https://drive.google.com/uc?export=view&id=0B66xaYRsJwbGclNHWVByY3ltRWM').play();     
+      human=[];
+      alert("Try Again. Reseting. Strict mode is on");
+      reset();
+ }}
+
+ $("#green").click(function(){
+    new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3').play();
+    $("#green").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+ human.push(1);
+    console.log(human);
+   if (human.length===solutionArray.length){
+        checkAnswer();
+     }
+  });
+  
+   $("#red").click(function(){
+      var audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+audio.play();
+$("#red").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+human.push(2);
+     if (human.length===solutionArray.length){
+        checkAnswer();
+     }
+});
+  
+   $("#yellow").click(function(){
+     var audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    audio.play();
+   $("#yellow").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+   human.push(3);
+       if (human.length===solutionArray.length){
+        checkAnswer();
+     }
+   });
+  
+   $("#blue").click(function(){
+     var audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+   audio.play();
+  $("#blue").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+   human.push(4);
+     if (human.length===solutionArray.length){
+        checkAnswer();
+     }
+   });
+
+      $("#reset").click(function(){
+    reset();
+  });
+
+  $("#start").click(function(){
+    human=[];
+ $("#start").prop('disabled', true);
+    $("#strict").prop('disabled', true);
+    console.log("start func triggered");
+ generateMove();
+    
+  });   
+
+});  //document.ready
+
+
+
+
+
