@@ -1,0 +1,335 @@
+#This was not apart of my FCC certificate but was a JQuery websraper I made on my day off work around June of 2019.
+#This API evenually changed so the code is now outdated but it was good practice scraping through data:
+  
+  <!DOCTYPE html>
+	<html lang="en">
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+ <meta http-equiv="refresh" content="60; URL=https://tvix-spy.000webhostapp.com/">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+ <title>Short Pairs</title>
+   <!--   	-->
+ 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- datatable lib -->
+ <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.4/b-html5-1.5.4/r-2.2.2/datatables.min.css"/>-->
+ <!--<script src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.4/b-html5-1.5.4/r-2.2.2/datatables.min.js"></script>-->
+<script>
+  $(document).ready(function() {
+$.get("https://api.iextrading.com/1.0//stock/qqq/batch?types=quote,=1m&last=1", function(data, status){
+  	var qqq_price=data.quote.latestPrice;
+  	var qqq_change=data.quote.change;
+  	var qqq_percent= qqq_change/qqq_price*100;
+  	if(qqq_percent>0) {
+      	$('#qqq-percent').addClass('green-text');
+  	} else{
+      	$('#qqq-percent').addClass('red-text');
+  	}
+ 	$('#qqq-info').html(data);
+   	$('#qqq-price').html(qqq_price);
+  	$('#qqq-change').html('$'+qqq_change);
+    	$('#qqq-percent').html(qqq_percent.toFixed(2)+'%');
+  });
+ 
+  $.get("https://api.iextrading.com/1.0//stock/sqqq/batch?types=quote,=1m&last=1", function(data, status){
+  	var sqqq_price=data.quote.latestPrice;
+  	var sqqq_change=data.quote.change;
+  	var sqqq_percent= sqqq_change/sqqq_price*100;
+  	if(sqqq_percent>0) {
+      	$('#sqqq-percent').addClass('green-text');
+  	} else{
+      	$('#sqqq-percent').addClass('red-text');
+  	}
+ 	$('#sqqq-info').html(data);
+   	$('#sqqq-price').html(sqqq_price);
+  	$('#sqqq-change').html('$'+sqqq_change);
+    	$('#sqqq-percent').html(sqqq_percent.toFixed(2)+'%');
+  });
+ 
+	$.get("https://api.iextrading.com/1.0//stock/tqqq/batch?types=quote,=1m&last=1", function(data, status){
+  	var tqqq_price=data.quote.latestPrice;
+  	var tqqq_change=data.quote.change;
+  	var tqqq_percent=tqqq_change/tqqq_price*100;
+  	if(tqqq_percent>0) {
+      	$('#tqqq-percent').addClass('green-text');
+  	} else{
+      	$('#tqqq-percent').addClass('red-text');
+  	}
+ 	$('#tqqq-info').html(data);
+   	$('#tqqq-price').html(tqqq_price);
+  	$('#tqqq-change').html('$'+tqqq_change);
+    	$('#tqqq-percent').html(tqqq_percent.toFixed(2)+'%');
+  });
+ 
+	$.get("https://api.iextrading.com/1.0//stock/spy/batch?types=quote,=1m&last=1", function(data, status){
+  	var spy_price=data.quote.latestPrice;
+  	var spy_change=data.quote.change;
+  	var spy_percent=spy_change/spy_price*100;
+  	if(spy_percent>0) {
+      	$('#spy-percent').addClass('green-text');
+  	} else{
+      	$('#spy-percent').addClass('red-text');
+  	}
+ 	$('#spy-info').html(data);
+   	$('#spy-price').html(spy_price);
+  	$('#spy-change').html('$'+spy_change);
+    	$('#spy-percent').html(spy_percent.toFixed(2)+'%');
+  });
+ 
+  	$.get("https://api.iextrading.com/1.0//stock/tvix/batch?types=quote,=1m&last=1", function(data, status){
+  	var tvix_price=data.quote.latestPrice;
+  	var tvix_change=data.quote.change;
+  	var tvix_percent=tvix_change/tvix_price*100;
+  	if(tvix_percent>0) {
+      	$('#tvix-percent').addClass('green-text');
+  	} else{
+      	$('#tvix-percent').addClass('red-text');
+  	}
+ 	$('#tvix-info').html(data);
+   	$('#tvix-price').html(tvix_price);
+  	$('#tvix-change').html('$'+tvix_change);
+    	$('#tvix-percent').html(tvix_percent.toFixed(2)+'%');
+  });
+ 
+ 	$.get("https://api.iextrading.com/1.0//stock/ugaz/batch?types=quote,=1m&last=1", function(data, status){
+  	var ugaz_price=data.quote.latestPrice;
+  	var ugaz_change=data.quote.change;
+  	var ugaz_percent=ugaz_change/ugaz_price*100;
+  	if(ugaz_percent>0) {
+      	$('#ugaz-percent').addClass('green-text');
+  	} else{
+      	$('#ugaz-percent').addClass('red-text');
+  	}
+ 	$('#ugaz-info').html(data);
+   	$('#ugaz-price').html(ugaz_price);
+  	$('#ugaz-change').html('$'+ugaz_change);
+    	$('#ugaz-percent').html(ugaz_percent.toFixed(2)+'%');
+  });
+ 
+   	$.get("https://api.iextrading.com/1.0//stock/dgaz/batch?types=quote,=1m&last=1", function(data, status){
+  	var dgaz_price=data.quote.latestPrice;
+  	var dgaz_change=data.quote.change;
+  	var dgaz_percent=dgaz_change/dgaz_price*100;
+  	if(dgaz_percent>0) {
+      	$('#dgaz-percent').addClass('green-text');
+  	} else{
+      	$('#dgaz-percent').addClass('red-text');
+  	}
+ 	$('#dgaz-info').html(data);
+   	$('#dgaz-price').html(dgaz_price);
+  	$('#dgaz-change').html('$'+dgaz_change);
+    	$('#dgaz-percent').html(dgaz_percent.toFixed(2)+'%');
+  });
+ 
+  	$.get("https://api.iextrading.com/1.0//stock/dwt/batch?types=quote,=1m&last=1", function(data, status){
+  	var dwt_price=data.quote.latestPrice;
+  	var dwt_change=data.quote.change;
+  	var dwt_percent=dwt_change/dwt_price*100;
+  	if(dwt_percent>0) {
+      	$('#dwt-percent').addClass('green-text');
+  	} else{
+      	$('#dwt-percent').addClass('red-text');
+  	}
+ 	$('#dwt-info').html(data);
+   	$('#dwt-price').html(dwt_price);
+  	$('#dwt-change').html('$'+dwt_change);
+    	$('#dwt-percent').html(dwt_percent.toFixed(2)+'%');
+  });
+ 
+    	$.get("https://api.iextrading.com/1.0//stock/uwt/batch?types=quote,=1m&last=1", function(data, status){
+  	var uwt_price=data.quote.latestPrice;
+  	var uwt_change=data.quote.change;
+  	var uwt_percent=uwt_change/uwt_price*100;
+  	if(uwt_percent>0) {
+      	$('#uwt-percent').addClass('green-text');
+  	} else{
+      	$('#uwt-percent').addClass('red-text');
+  	}
+ 	$('#uwt-info').html(data);
+   	$('#uwt-price').html(uwt_price);
+  	$('#uwt-change').html('$'+uwt_change);
+    	$('#uwt-percent').html(uwt_percent.toFixed(2)+'%');
+  });
+ 
+   $.get("https://api.iextrading.com/1.0//stock/dust/batch?types=quote,=1m&last=1", function(data, status){
+  	var dust_price=data.quote.latestPrice;
+  	var dust_change=data.quote.change;
+  	var dust_percent=dust_change/dust_price*100;
+  	if(dust_percent>0) {
+      	$('#dust-percent').addClass('green-text');
+  	} else{
+      	$('#dust-percent').addClass('red-text');
+  	}
+ 	$('#dust-info').html(data);
+   	$('#dust-price').html(dust_price);
+  	$('#dust-change').html('$'+dust_change);
+    	$('#dust-percent').html(dust_percent.toFixed(2)+'%');
+  });
+ 
+ 	$.get("https://api.iextrading.com/1.0//stock/nugt/batch?types=quote,=1m&last=1", function(data, status){
+  	var nugt_price=data.quote.latestPrice;
+  	var nugt_change=data.quote.change;
+  	var nugt_percent=nugt_change/nugt_price*100;
+  	if(nugt_percent>0) {
+      	$('#nugt-percent').addClass('green-text');
+  	} else{
+      	$('#nugt-percent').addClass('red-text');
+  	}
+ 	$('#nugt-info').html(data);
+   	$('#nugt-price').html(nugt_price);
+  	$('#nugt-change').html('$'+nugt_change);
+    	$('#nugt-percent').html(nugt_percent.toFixed(2)+'%');
+  });
+ 
+  $.get("https://api.iextrading.com/1.0//stock/jdst/batch?types=quote,=1m&last=1", function(data, status){
+  	var jdst_price=data.quote.latestPrice;
+  	var jdst_change=data.quote.change;
+  	var jdst_percent=jdst_change/jdst_price*100;
+  	if(jdst_percent>0) {
+      	$('#jdst-percent').addClass('green-text');
+  	} else{
+      	$('#jdst-percent').addClass('red-text');
+  	}
+ 	$('#jdst-info').html(data);
+   	$('#jdst-price').html(jdst_price);
+  	$('#jdst-change').html('$'+jdst_change);
+    	$('#jdst-percent').html(jdst_percent.toFixed(2)+'%');
+  });
+ 
+	$.get("https://api.iextrading.com/1.0//stock/jnug/batch?types=quote,=1m&last=1", function(data, status){
+  	var jnug_price=data.quote.latestPrice;
+  	var jnug_change=data.quote.change;
+  	var jnug_percent=jnug_change/jnug_price*100;
+  	if(jnug_percent>0) {
+      	$('#jnug-percent').addClass('green-text');
+  	} else{
+      	$('#jnug-percent').addClass('red-text');
+  	}
+ 	$('#jnug-info').html(data);
+   	$('#jnug-price').html(jnug_price);
+  	$('#jnug-change').html('$'+jnug_change);
+    	$('#jnug-percent').html(jnug_percent.toFixed(2)+'%');
+  });
+   $.get("https://api.iextrading.com/1.0//stock/tza/batch?types=quote,=1m&last=1", function(data, status){
+  	var tza_price=data.quote.latestPrice;
+  	var tza_change=data.quote.change;
+  	var tza_percent=tza_change/tza_price*100;
+  	if(tza_percent>0) {
+      	$('#tza-percent').addClass('green-text');
+  	} else{
+      	$('#tza-percent').addClass('red-text');
+  	}
+ 	$('#tza-info').html(data);
+   	$('#tza-price').html(tza_price);
+  	$('#tza-change').html('$'+tza_change);
+    	$('#tza-percent').html(tza_percent.toFixed(2)+'%');
+  });
+   $.get("https://api.iextrading.com/1.0//stock/tza/batch?types=quote,=1m&last=1", function(data, status){
+  	var tza_price=data.quote.latestPrice;
+  	var tza_change=data.quote.change;
+  	var tza_percent=tza_change/tza_price*100;
+  	if(tza_percent>0) {
+      	$('#tza-percent').addClass('green-text');
+  	} else{
+      	$('#tza-percent').addClass('red-text');
+  	}
+ 	$('#tza-info').html(data);
+   	$('#tza-price').html(tza_price);
+  	$('#tza-change').html('$'+tza_change);
+    	$('#tza-percent').html(tza_percent.toFixed(2)+'%');
+  });
+ 
+ 	$.get("https://api.iextrading.com/1.0//stock/tna/batch?types=quote,=1m&last=1", function(data, status){
+  	var tna_price=data.quote.latestPrice;
+  	var tna_change=data.quote.change;
+  	var tna_percent=tna_change/tna_price*100;
+  	if(tna_percent>0) {
+      	$('#tna-percent').addClass('green-text');
+  	} else{
+      	$('#tna-percent').addClass('red-text');
+  	}
+ 	$('#tna-info').html(data);
+   	$('#tna-price').html(tna_price);
+  	$('#tna-change').html('$'+tna_change);
+    	$('#tna-percent').html(tna_percent.toFixed(2)+'%');
+  });
+   $.get("https://api.iextrading.com/1.0//stock/gush/batch?types=quote,=1m&last=1", function(data, status){
+  	var gush_price=data.quote.latestPrice;
+  	var gush_change=data.quote.change;
+  	var gush_percent=gush_change/gush_price*100;
+  	if(gush_percent>0) {
+      	$('#gush-percent').addClass('green-text');
+  	} else{
+      	$('#gush-percent').addClass('red-text');
+  	}
+ 	$('#gush-info').html(data);
+   	$('#gush-price').html(gush_price);
+  	$('#gush-change').html('$'+gush_change);
+    	$('#gush-percent').html(gush_percent.toFixed(2)+'%');
+  });
+   $.get("https://api.iextrading.com/1.0//stock/drip/batch?types=quote,=1m&last=1", function(data, status){
+  	var drip_price=data.quote.latestPrice;
+  	var drip_change=data.quote.change;
+  	var drip_percent=drip_change/drip_price*100;
+  	if(drip_percent>0) {
+      	$('#drip-percent').addClass('green-text');
+  	} else{
+      	$('#drip-percent').addClass('red-text');
+  	}
+ 	$('#drip-info').html(data);
+   	$('#drip-price').html(drip_price);
+  	$('#drip-change').html('$'+drip_change);
+    	$('#drip-percent').html(drip_percent.toFixed(2)+'%');
+  });
+   $.get("https://api.iextrading.com/1.0//stock/svxy/batch?types=quote,=1m&last=1", function(data, status){
+  	var svxy_price=data.quote.latestPrice;
+  	var svxy_change=data.quote.change;
+  	var svxy_percent=svxy_change/svxy_price*100;
+  	if(svxy_percent>0) {
+      	$('#svxy-percent').addClass('green-text');
+  	} else{
+      	$('#svxy-percent').addClass('red-text');
+  	}
+ 	$('#svxy-info').html(data);
+   	$('#svxy-price').html(svxy_price);
+  	$('#svxy-change').html('$'+svxy_change);
+    	$('#svxy-percent').html(svxy_percent.toFixed(2)+'%');
+  });
+  }); //end ready
+  </script>
+ 
+  <body>
+     	<p class="bold">SPY: <span id="spy-percent"></span>
+     	<p class="bold">TVIX: <span id="svxy-percent"></span>
+      	<p class="bold">TVIX: <span id="tvix-percent"></span>
+      	<hr>
+	<p class="bold">QQQ: <span id="qqq-percent"></span>
+   	<p class="bold">SQQQ: <span id="sqqq-percent"></span>
+     	<p class="bold">TQQQ: <span id="tqqq-percent"></span>
+     	<hr>
+     	
+      	<p class="bold">UGAZ: <span id="ugaz-percent"></span>
+       	<p class="bold">DGAZ: <span id="dgaz-percent"></span>
+        	<hr>
+       	
+        	<p class="bold">DWT: <span id="dwt-percent"></span>
+       	<p class="bold">UWT: <span id="uwt-percent"></span>
+        	<hr>
+       	
+            	<p class="bold">DUST: <span id="dust-percent"></span>
+       	<p class="bold">NGUT: <span id="nugt-percent"></span>
+        	<hr>
+       	
+            	<p class="bold">JNUG: <span id="jnug-percent"></span>
+       	<p class="bold">JDST: <span id="jdst-percent"></span>
+        	<hr>
+       	
+         	<p class="bold">TZA: <span id="tza-percent"></span>
+       	<p class="bold">TNA: <span id="tna-percent"></span>
+        	<hr>
+       	
+        	<p class="bold">DRIP: <span id="drip-percent"></span>
+       	<p class="bold">GUSH: <span id="gush-percent"></span>
+        	<hr>
+  </body>
